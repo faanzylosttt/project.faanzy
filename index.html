@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYMENT ALFAAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background: url('https://files.catbox.moe/kq3wra.jpg') no-repeat center center fixed;
+            background-size: cover;
+            color: white;
+        }
+        .container {
+            max-width: 600px;
+            margin: 50px auto;
+            background: rgba(0, 0, 0, 0.7);
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+        }
+        .payment-method {
+            margin: 20px 0;
+            padding: 15px;
+            border: 1px solid #ddd;
+            border-radius: 6px;
+            background-color: rgba(255, 255, 255, 0.1);
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            cursor: pointer;
+        }
+        .payment-method span {
+            font-size: 16px;
+            font-weight: bold;
+            color: #fff;
+        }
+        .note {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: rgba(255, 255, 255, 0.2);
+            border: 1px solid #ffeeba;
+            border-radius: 6px;
+            color: #ffeeba;
+            font-size: 14px;
+        }
+        .qris-container {
+            position: relative;
+            overflow: hidden;
+        }
+        .qris img {
+            max-width: 100%;
+            border-radius: 8px;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            cursor: pointer;
+        }
+        .qris img:hover {
+            transform: scale(1.2);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
+        }
+        .notification {
+            display: none;
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(0, 255, 0, 0.8);
+            color: white;
+            padding: 10px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: bold;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
+            z-index: 9999;
+        }
+        .notification.show {
+            display: block;
+        }
+        .footer {
+            margin-top: 30px;
+            text-align: center;
+            font-size: 14px;
+            color: #ccc;
+        }
+        .footer span {
+            font-weight: bold;
+        }
+        .footer a {
+            color: #fff;
+            text-decoration: none;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>PAYMENT ALFAAN</h1>
+        
+        <div class="payment-method" onclick="copyText('082281704226')">
+            <span>💳 DANA: 082281704226</span>
+        </div>
+        
+        <div class="payment-method" onclick="copyText('082281704226')">
+            <span>💳 GOPAY: 082281704226</span>
+        </div>
+        
+        <div class="payment-method" onclick="copyText('082281704226')">
+            <span>💳 OVO: 082281704226</span>
+        </div>
+        
+        <div class="payment-method qris-container">
+            <span>💳 QRIS:</span>
+            <a href="https://files.catbox.moe/2ppy45.jpg" target="_blank">
+                <img src="https://files.catbox.moe/2ppy45.jpg" alt="QRIS - Klik untuk memperbesar">
+            </a>
+        </div>
+        
+        <div class="note">
+            📝 NOTE: WAJIB KIRIM BUKTI PAYMENT
+        </div>
+
+        <div class="footer">
+            PEMBUAT WEB: <span>AL FAANZY HOSTING</span> <br>
+            <a href="tel:082281704226">082281704226</a>
+        </div>
+    </div>
+
+    <div id="notification" class="notification">
+        ✔ Nomor berhasil disalin!
+    </div>
+
+    <script>
+        function copyText(text) {
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification();
+            }).catch(err => {
+                alert("Gagal menyalin teks: " + err);
+            });
+        }
+
+        function showNotification() {
+            const notification = document.getElementById('notification');
+            notification.classList.add('show');
+            setTimeout(() => {
+                notification.classList.remove('show');
+            }, 2000); // Notifikasi akan hilang setelah 2 detik
+        }
+    </script>
+</body>
+</html>
