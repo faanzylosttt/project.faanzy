@@ -9,6 +9,54 @@
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            color: white;
+            overflow: hidden; /* Mencegah scroll karena efek api */
+        }
+        canvas {
+            position: fixed;
+            top: 0;
+            left: 0;
+            z-index: -1; /* Pastikan canvas di belakang elemen lain */
+        }
+        .overlay {
+            background: rgba(0, 0, 0, 0.7);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+        .container {
+            width: 90%;
+            max-width: 800px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+        }
+        h1 {
+            text-align: center;
+            color: #fff;
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+        }
+        /* Sisanya tetap sama */
+    </style>
+</head>
+<body>
+    <!-- Canvas untuk efek warna api -->
+    <canvas id="fireCanvas"></canvas>
+
+    <div class="overlay">
+        <div class="container">
+            <h1>PAYMENT ALFAAN</h1>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PAYMENT ALFAAN</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
             background: url('https://files.catbox.moe/kq3wra.jpg') no-repeat center center fixed;
             background-size: cover;
             color: white;
@@ -76,10 +124,6 @@
             font-size: 1.1rem;
             font-weight: bold;
             color: #fff;
-        }
-        .payment-method small {
-            font-size: 0.9rem;
-            color: #ccc;
         }
         .show-qris-button {
             width: 100%;
@@ -209,17 +253,14 @@
             
             <div class="payment-method" onclick="copyText('082281704226')">
                 <span>💳 DANA: 082281704226</span>
-                <small>Klik untuk menyalin</small>
             </div>
             
             <div class="payment-method" onclick="copyText('082281704226')">
                 <span>💳 GOPAY: 082281704226</span>
-                <small>Klik untuk menyalin</small>
             </div>
             
             <div class="payment-method" onclick="copyText('082281704226')">
                 <span>💳 OVO: 082281704226</span>
-                <small>Klik untuk menyalin</small>
             </div>
             
             <div id="qris-container" class="qris-container">
@@ -287,6 +328,76 @@
             const modal = document.getElementById("qris-modal");
             modal.style.display = "none";
         }
+    </script>
+</body>
+</html>
+        </div>
+    </div>
+
+    <script>
+        const canvas = document.getElementById('fireCanvas');
+        const ctx = canvas.getContext('2d');
+
+        // Atur ukuran canvas agar sesuai dengan layar
+        canvas.width = window.innerWidth;
+        canvas.height = window.innerHeight;
+
+        const particlesArray = [];
+        const numberOfParticles = 100;
+
+        class Particle {
+            constructor() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 5 + 1;
+                this.speedX = Math.random() * 3 - 1.5; // Kecepatan horizontal
+                this.speedY = Math.random() * 3 - 1.5; // Kecepatan vertikal
+                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Warna api
+            }
+
+            update() {
+                this.x += this.speedX;
+                this.y += this.speedY;
+
+                // Jika partikel keluar dari layar, pindahkan ke posisi awal
+                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
+                    this.x = Math.random() * canvas.width;
+                    this.y = canvas.height;
+                }
+            }
+
+            draw() {
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fillStyle = this.color;
+                ctx.fill();
+            }
+        }
+
+        function init() {
+            for (let i = 0; i < numberOfParticles; i++) {
+                particlesArray.push(new Particle());
+            }
+        }
+
+        function animate() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            for (let i = 0; i < particlesArray.length; i++) {
+                particlesArray[i].update();
+                particlesArray[i].draw();
+            }
+            requestAnimationFrame(animate);
+        }
+
+        // Jalankan fungsi
+        init();
+        animate();
+
+        // Pastikan canvas memperbarui ukuran saat layar diubah ukurannya
+        window.addEventListener('resize', () => {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        });
     </script>
 </body>
 </html>
