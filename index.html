@@ -397,10 +397,11 @@
         animate();
 
         // Pastikan canvas memperbarui ukuran saat layar diubah ukurannya
-        window.addEventListener('resize', () => {
-            canvas.width = window.innerWidth;
-            canvas.height = window.innerHeight;
-        });
+window.addEventListener('resize', () => {
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    init(); // Inisialisasi ulang partikel agar sesuai
+});
     </script>
 </body>
 </html>
