@@ -3,405 +3,102 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAYMENT FAANZY HOSTING</title>
+    <title>Web Menu Panel Jasteb Faanzy</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            color: white;
-            overflow: hidden; /* Mencegah scroll karena efek api */
-        }
-        canvas {
-            position: fixed;
-            top: 0;
-            left: 0;
-            z-index: -1; /* Pastikan canvas di belakang elemen lain */
-        }
-        .overlay {
-            background: rgba(0, 0, 0, 0.7);
-            min-height: 100vh;
             display: flex;
             justify-content: center;
             align-items: center;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
-            border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
-        }
-        h1 {
-            text-align: center;
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        /* Sisanya tetap sama */
-    </style>
-</head>
-<body>
-    <!-- Canvas untuk efek warna api -->
-    <canvas id="fireCanvas"></canvas>
-
-    <div class="overlay">
-        <div class="container">
-            <h1>PAYMENT ALFAAN</h1>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PAYMENT FAANZY</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
+            height: 100vh;
             margin: 0;
-            padding: 0;
-            background: url('https://files.catbox.moe/kq3wra.jpg') no-repeat center center fixed;
+            background-image: url('https://files.catbox.moe/5bpqir.jpg');
             background-size: cover;
-            color: white;
+            background-position: center;
+            background-repeat: no-repeat;
+            overflow: auto; /* Tambahkan scroll jika menu terlalu banyak */
         }
-        .marquee {
-            width: 100%;
-            overflow: hidden;
-            white-space: nowrap;
-            box-sizing: border-box;
-            background: #000;
-            color: #fff;
-            padding: 10px 0;
+
+        .menu-container {
             text-align: center;
-        }
-        .marquee span {
-            display: inline-block;
-            animation: marquee 10s linear infinite;
-        }
-        @keyframes marquee {
-            from {
-                transform: translateX(100%);
-            }
-            to {
-                transform: translateX(-100%);
-            }
-        }
-        .overlay {
-            background: rgba(0, 0, 0, 0.7);
-            min-height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-        }
-        .container {
-            width: 90%;
-            max-width: 800px;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 30px;
+            padding: 20px;
+            background: rgba(255, 255, 255, 0.9); /* Transparansi latar belakang */
+            border: 1px solid #ddd;
             border-radius: 10px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.5);
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            max-width: 90%;
+            overflow-y: auto; /* Tambahkan scroll jika tinggi kontainer terlalu besar */
         }
-        h1 {
-            text-align: center;
-            color: #fff;
-            font-size: 2.5rem;
-            margin-bottom: 20px;
-        }
-        .payment-method {
-            margin: 15px 0;
-            padding: 15px;
-            border: 1px solid rgba(255, 255, 255, 0.2);
-            border-radius: 8px;
-            background-color: rgba(255, 255, 255, 0.1);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            cursor: pointer;
-            transition: background-color 0.3s ease, transform 0.2s ease;
-        }
-        .payment-method:hover {
-            background-color: rgba(255, 255, 255, 0.2);
-            transform: scale(1.05);
-        }
-        .payment-method span {
-            font-size: 1.1rem;
-            font-weight: bold;
-            color: #fff;
-        }
-        .show-qris-button {
-            width: 100%;
-            padding: 12px;
-            margin-top: 20px;
+
+        .menu-container button {
+            margin: 10px 0;
+            padding: 10px 20px;
             background-color: #007bff;
             color: white;
             border: none;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            font-size: 1rem;
-            font-weight: bold;
-            transition: background-color 0.3s ease, transform 0.2s ease;
+            width: 100%; /* Sesuaikan dengan lebar kontainer */
+            max-width: 300px; /* Batas maksimum untuk tombol */
         }
-        .show-qris-button:hover {
+
+        .menu-container button:hover {
             background-color: #0056b3;
-            transform: scale(1.05);
-        }
-        .qris-container {
-            margin-top: 20px;
-            text-align: center;
-        }
-        .qris img {
-            max-width: 100%;
-            border-radius: 8px;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            cursor: pointer;
-        }
-        .qris img:hover {
-            transform: scale(1.1);
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.5);
-        }
-        .modal {
-            display: none;
-            position: fixed;
-            z-index: 1000;
-            left: 0;
-            top: 0;
-            width: 100%;
-            height: 100%;
-            overflow: auto;
-            background-color: rgba(0, 0, 0, 0.9);
-        }
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 800px;
-        }
-        .modal-content:hover {
-            transform: scale(1.05);
-        }
-        .close {
-            position: absolute;
-            top: 20px;
-            right: 35px;
-            color: #fff;
-            font-size: 40px;
-            font-weight: bold;
-            cursor: pointer;
-        }
-        .notification {
-            display: none;
-            position: fixed;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            background: rgba(0, 0, 255, 0.8); /* Warna biru */
-            color: white;
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 16px;
-            font-weight: bold;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.5);
-            z-index: 9999;
-            animation: fadeInOut 3s ease;
-        }
-        @keyframes fadeInOut {
-            0% {
-                opacity: 0;
-                transform: translate(-50%, -60%);
-            }
-            10% {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-            90% {
-                opacity: 1;
-                transform: translate(-50%, -50%);
-            }
-            100% {
-                opacity: 0;
-                transform: translate(-50%, -40%);
-            }
-        }
-        .footer {
-            margin-top: 30px;
-            text-align: center;
-            font-size: 14px;
-            color: #ccc;
-        }
-        .footer span {
-            font-weight: bold;
-        }
-        .footer a {
-            color: #fff;
-            text-decoration: none;
-            font-weight: bold;
-        }
-        .warning-text {
-            margin-top: 20px;
-            text-align: center;
-            font-size: 1.2rem;
-            color: #ffcc00;
-            font-weight: bold;
         }
     </style>
 </head>
 <body>
-    <div class="marquee">
-    <span class="rainbow">FAANZY HOSTING</span>
-</div>
-
-    <div class="overlay">
-        <div class="container">
-            <h1>PAYMENT FAANZY</h1>
-            
-            <div class="payment-method" onclick="copyText('082281704226')">
-    <span>💳 DANA: 082281704226</span>
-    <img src="https://files.catbox.moe/x1tw8u.jpeg" alt="DANA" style="width: 40px; height: 40px; margin-left: 10px; border-radius: 5px;">
-</div>
-            
-            <div class="payment-method" onclick="copyText('082281704226')">
-    <span>💳 GOPAY: 082281704226</span>
-    <img src="https://files.catbox.moe/3gig7z.jpg" alt="Gopay" style="width: 40px; height: 40px; margin-left: 10px; border-radius: 5px;">
-</div>
-            
-            <div class="payment-method" onclick="copyText('082281704226')">
-    <span>💳 OVO: 082281704226</span>
-    <img src="https://files.catbox.moe/pczy7t.jpg" alt="OVO" style="width: 40px; height: 40px; margin-left: 10px; border-radius: 5px;">
-</div>
-            
-            <div id="qris-container" class="qris-container">
-                <div class="qris">
-                    <img id="qris-image" src="https://files.catbox.moe/2ppy45.jpg" alt="QRIS" style="width: 200px; height: auto;" onclick="openModal()">
-                </div>
-                <br>
-                <!-- Download QRIS Button -->
-                <a href="https://files.catbox.moe/2ppy45.jpg" download="QRIS-Payment.jpg">
-                    <button class="show-qris-button">Download QRIS</button>
-                </a>
-            </div>
-            
-            <div class="footer">
-                PEMBUAT WEB: <span>AL FAANZY HOSTING</span> <br>
-                <a href="tel:082281704226">082281704226</a>
-            </div>
-
-            <div class="warning-text">
-                JANGAN LUPA UNTUK KIRIM BUKTI TRANSFER
-            </div>
-        </div>
-    </div>
-
-    <!-- Modal for Zooming QRIS -->
-    <div id="qris-modal" class="modal">
-        <span class="close" onclick="closeModal()">&times;</span>
-        <img class="modal-content" id="modal-image">
-    </div>
-
-    <div id="notification" class="notification">
-        ✔ Nomor berhasil disalin!
+    <div class="menu-container">
+        <h2 id="menu-title">Pilih Panel Jasteb Anda</h2>
+        <div id="menu-buttons"></div>
     </div>
 
     <script>
-        // Copy text to clipboard
-        function copyText(text) {
-            navigator.clipboard.writeText(text).then(() => {
-                showNotification();
-            }).catch(err => {
-                alert("Gagal menyalin teks: " + err);
-            });
-        }
+        // Konfigurasi menu untuk 20 menu
+        const menuConfig = [
+            { text: "Sopoo", url: "https://ramadhanmoon.nicohosting.my.id/sewafaanzy1/ultimate", password: "buy1", promptMessage: "Masukkan password untuk Posoo", successMessage: "Password benar! Anda akan diarahkan ke Panel 1.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "PT JASTEB 1", url: "https://ramadhanmoon.nicohosting.my.id/pt1faanzy/ultimate", password: "yanto1", promptMessage: "Masukkan password untuk Panel 2", successMessage: "Password benar! Anda akan diarahkan ke Panel 2.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "PT JASTEB 2", url: "https://ramadhanmoon.nicohosting.my.id/pt2faanzy/ultimate", password: "yanto2", promptMessage: "Masukkan password untuk Panel 3", successMessage: "Password benar! Anda akan diarahkan ke Panel 3.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Faanzy Prib", url: "https://ramadhanmoon.nicohosting.my.id/sewafaan2/ultimate", password: "faanzy18", promptMessage: "Masukkan password untuk Panel 4", successMessage: "Password benar! Anda akan diarahkan ke Panel 4.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 5", url: "https://example.com/panel5", password: "pass5", promptMessage: "Masukkan password untuk Panel 5", successMessage: "Password benar! Anda akan diarahkan ke Panel 5.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 6", url: "https://example.com/panel6", password: "pass6", promptMessage: "Masukkan password untuk Panel 6", successMessage: "Password benar! Anda akan diarahkan ke Panel 6.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 7", url: "https://example.com/panel7", password: "pass7", promptMessage: "Masukkan password untuk Panel 7", successMessage: "Password benar! Anda akan diarahkan ke Panel 7.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 8", url: "https://example.com/panel8", password: "pass8", promptMessage: "Masukkan password untuk Panel 8", successMessage: "Password benar! Anda akan diarahkan ke Panel 8.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 9", url: "https://example.com/panel9", password: "pass9", promptMessage: "Masukkan password untuk Panel 9", successMessage: "Password benar! Anda akan diarahkan ke Panel 9.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 10", url: "https://example.com/panel10", password: "pass10", promptMessage: "Masukkan password untuk Panel 10", successMessage: "Password benar! Anda akan diarahkan ke Panel 10.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 11", url: "https://example.com/panel11", password: "pass11", promptMessage: "Masukkan password untuk Panel 11", successMessage: "Password benar! Anda akan diarahkan ke Panel 11.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 12", url: "https://example.com/panel12", password: "pass12", promptMessage: "Masukkan password untuk Panel 12", successMessage: "Password benar! Anda akan diarahkan ke Panel 12.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 13", url: "https://example.com/panel13", password: "pass13", promptMessage: "Masukkan password untuk Panel 13", successMessage: "Password benar! Anda akan diarahkan ke Panel 13.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 14", url: "https://example.com/panel14", password: "pass14", promptMessage: "Masukkan password untuk Panel 14", successMessage: "Password benar! Anda akan diarahkan ke Panel 14.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 15", url: "https://example.com/panel15", password: "pass15", promptMessage: "Masukkan password untuk Panel 15", successMessage: "Password benar! Anda akan diarahkan ke Panel 15.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 16", url: "https://example.com/panel16", password: "pass16", promptMessage: "Masukkan password untuk Panel 16", successMessage: "Password benar! Anda akan diarahkan ke Panel 16.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 17", url: "https://example.com/panel17", password: "pass17", promptMessage: "Masukkan password untuk Panel 17", successMessage: "Password benar! Anda akan diarahkan ke Panel 17.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 18", url: "https://example.com/panel18", password: "pass18", promptMessage: "Masukkan password untuk Panel 18", successMessage: "Password benar! Anda akan diarahkan ke Panel 18.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 19", url: "https://example.com/panel19", password: "pass19", promptMessage: "Masukkan password untuk Panel 19", successMessage: "Password benar! Anda akan diarahkan ke Panel 19.", errorMessage: "Password salah! Silakan coba lagi." },
+            { text: "Panel 20", url: "https://example.com/panel20", password: "pass20", promptMessage: "Masukkan password untuk Panel 20", successMessage: "Password benar! Anda akan diarahkan ke Panel 20.", errorMessage: "Password salah! Silakan coba lagi." },
+        ];
 
-        // Show notification
-        function showNotification() {
-            const notification = document.getElementById("notification");
-            notification.style.display = "block";
-            setTimeout(() => {
-                notification.style.display = "none";
-            }, 3000);
-        }
+        // Memuat tombol-tombol menu secara otomatis
+        const menuButtonsContainer = document.getElementById('menu-buttons');
 
-        // Open modal for QRIS zoom
-        function openModal() {
-            const modal = document.getElementById("qris-modal");
-            const modalImg = document.getElementById("modal-image");
-            const qrisImg = document.getElementById("qris-image");
-            modal.style.display = "block";
-            modalImg.src = qrisImg.src;
-        }
+        menuConfig.forEach(menu => {
+            const button = document.createElement('button');
+            button.textContent = menu.text;
+            button.onclick = () => checkPassword(menu);
+            menuButtonsContainer.appendChild(button);
+        });
 
-        // Close modal
-        function closeModal() {
-            const modal = document.getElementById("qris-modal");
-            modal.style.display = "none";
-        }
-    </script>
-</body>
-</html>
-        </div>
-    </div>
+        // Fungsi untuk validasi password
+        function checkPassword(menu) {
+            const userPassword = prompt(menu.promptMessage);
 
-    <script>
-        const canvas = document.getElementById('fireCanvas');
-        const ctx = canvas.getContext('2d');
-
-        // Atur ukuran canvas agar sesuai dengan layar
-        canvas.width = window.innerWidth;
-        canvas.height = window.innerHeight;
-
-        const particlesArray = [];
-        const numberOfParticles = 100;
-
-        class Particle {
-            constructor() {
-                this.x = Math.random() * canvas.width;
-                this.y = Math.random() * canvas.height;
-                this.size = Math.random() * 5 + 1;
-                this.speedX = Math.random() * 3 - 1.5; // Kecepatan horizontal
-                this.speedY = Math.random() * 3 - 1.5; // Kecepatan vertikal
-                this.color = `hsl(${Math.random() * 360}, 100%, 50%)`; // Warna api
-            }
-
-            update() {
-                this.x += this.speedX;
-                this.y += this.speedY;
-
-                // Jika partikel keluar dari layar, pindahkan ke posisi awal
-                if (this.x < 0 || this.x > canvas.width || this.y < 0 || this.y > canvas.height) {
-                    this.x = Math.random() * canvas.width;
-                    this.y = canvas.height;
-                }
-            }
-
-            draw() {
-                ctx.beginPath();
-                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-                ctx.fillStyle = this.color;
-                ctx.fill();
+            if (userPassword === menu.password) {
+                alert(menu.successMessage);
+                window.location.href = menu.url;
+            } else {
+                alert(menu.errorMessage);
             }
         }
-
-        function init() {
-            for (let i = 0; i < numberOfParticles; i++) {
-                particlesArray.push(new Particle());
-            }
-        }
-
-        function animate() {
-            ctx.clearRect(0, 0, canvas.width, canvas.height);
-            for (let i = 0; i < particlesArray.length; i++) {
-                particlesArray[i].update();
-                particlesArray[i].draw();
-            }
-            requestAnimationFrame(animate);
-        }
-
-        // Jalankan fungsi
-        init();
-        animate();
-
-        // Pastikan canvas memperbarui ukuran saat layar diubah ukurannya
-window.addEventListener('resize', () => {
-    canvas.width = window.innerWidth;
-    canvas.height = window.innerHeight;
-    init(); // Inisialisasi ulang partikel agar sesuai
-});
     </script>
 </body>
 </html>
